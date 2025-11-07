@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1"
+      fx:controller="rw.app.MainController">
+    <children>
+        <MenuBar VBox.vgrow="NEVER">
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#loadFile" text="Load"/>
+                        <MenuItem mnemonicParsing="false" onAction="#saveBattle" text="Save"/>
+                        <MenuItem mnemonicParsing="false" onAction="#quit" text="Quit"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem fx:id="Help" mnemonicParsing="false" onAction="#viewAlert" text="AboutRWMapEditor"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <SplitPane dividerPositions="0.25, 0.5" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0"
+                   VBox.vgrow="ALWAYS">
+            <items>
+                <AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="521.0" prefWidth="223.0"
+                            SplitPane.resizableWithParent="false">
+                    <children>
+                        <Label alignment="CENTER" layoutY="14.0" minWidth="60.0" prefWidth="-1.0" style="&#10;"
+                               text="Battle" textAlignment="CENTER" textFill="#1e1d1d" wrapText="false">
+                            <font>
+                                <Font size="18.0" fx:id="x1"/>
+                            </font>
+                        </Label>
+                        <TextField fx:id="rows" alignment="CENTER" layoutX="61.0" layoutY="37.0" text="3"/>
+                        <TextField fx:id="columns" alignment="CENTER" layoutX="61.0" layoutY="70.0" text="3"/>
+                        <TextField fx:id="pSymbol" alignment="CENTER" layoutX="61.0" layoutY="160.0"
+                                   onKeyTyped="#getPSymbol" text="P"/>
+                        <TextField fx:id="pName" alignment="CENTER" layoutX="61.0" layoutY="195.0"
+                                   onKeyTyped="#getPName" text="PredaKing"/>
+                        <TextField fx:id="pHealth" alignment="CENTER" layoutX="61.0" layoutY="230.0"
+                                   onKeyTyped="#getPHealth" text="10"/>
+                        <TextField fx:id="mSymbol" alignment="CENTER" layoutX="61.0" layoutY="345.0" text="O"/>
+                        <TextField fx:id="mName" alignment="CENTER" layoutX="61.0" layoutY="378.0"
+                                   onKeyTyped="#getMName" text="Optimus Primal"/>
+                        <TextField fx:id="mHealth" alignment="CENTER" layoutX="61.0" layoutY="411.0"
+                                   onKeyTyped="#getMHealth" text="10"/>
+                        <TextField fx:id="mWeapon" alignment="CENTER" layoutX="61.0" layoutY="447.0"
+                                   onKeyTyped="#getMWeapon" text="3"/>
+                        <TextField fx:id="mArmor" alignment="CENTER" layoutX="61.0" layoutY="483.0"
+                                   onKeyTyped="#getMArmor" text="1"/>
+                        <Button layoutX="101.0" layoutY="106.0" mnemonicParsing="false" onAction="#showGrid"
+                                text="Create New Battle"/>
+                        <RadioButton fx:id="predaCon" layoutX="92.0" layoutY="135.0" mnemonicParsing="false"
+                                     onAction="#addingPredaConLabel">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="group"/>
+                            </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="maximal" layoutX="83.0" layoutY="319.0" mnemonicParsing="false"
+                                     onAction="#addingMaximalLabel" toggleGroup="$group"/>
+                        <Label layoutX="15.0" layoutY="42.0" text="Rows"/>
+                        <Label layoutX="6.0" layoutY="75.0" text="Columns"/>
+                        <Label layoutX="8.0" layoutY="132.0" text="PredaCon">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="316.0" text="Maximal">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                        <Label layoutX="15.0" layoutY="165.0" text="Symbol"/>
+                        <Label layoutX="15.0" layoutY="200.0" text="Name"/>
+                        <Label layoutX="16.0" layoutY="235.0" text="Health"/>
+                        <Label layoutX="15.0" layoutY="267.0" text="Weapon"/>
+                        <Label layoutX="13.0" layoutY="350.0" text="Symbol"/>
+                        <Label layoutX="19.0" layoutY="383.0" text="Name"/>
+                        <Label layoutX="19.0" layoutY="416.0" text="Health"/>
+                        <Label layoutX="11.0" layoutY="452.0" text="Weapon"/>
+                        <Label layoutX="19.0" layoutY="488.0" text="Armor"/>
+                        <ComboBox fx:id="comboBox" layoutX="66.0" layoutY="263.0" prefWidth="150.0"/>
+                    </children>
+                </AnchorPane>
+                <ScrollPane maxWidth="1.7976931348623157E308" minWidth="370.0" prefHeight="551.0"
+                            SplitPane.resizableWithParent="false">
+                    <content>
+                        <AnchorPane id="Content" fx:id="viewPane" maxWidth="1.7976931348623157E308" minHeight="-1.0"
+                                    minWidth="370.0" prefHeight="551.0">
+                            <children>
+                                <Label fx:id="viewLabel" alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0"
+                                       style="&#10;" text="View" textAlignment="CENTER" wrapText="false"/>
+                                <GridPane fx:id="gridPane">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                                    </rowConstraints>
+                                </GridPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </ScrollPane>
+                <AnchorPane minWidth="-Infinity" prefHeight="521.0" prefWidth="186.0"
+                            SplitPane.resizableWithParent="false">
+                    <children>
+                        <TextArea fx:id="details" layoutX="2.0" layoutY="37.0" prefHeight="200.0" prefWidth="175.0"/>
+                        <Label alignment="CENTER" font="$x1" layoutX="14.0" layoutY="14.0" style="&#10;" text="Details"
+                               textAlignment="CENTER" wrapText="false"/>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
+            <children>
+                <Label fx:id="leftStatus" maxHeight="1.7976931348623157E308" maxWidth="-1.0"
+                       text="Enter rows and columns and hit Create New Battle button to draw battle field"
+                       HBox.hgrow="ALWAYS">
+                    <font>
+                        <Font size="11.0" fx:id="x3"/>
+                    </font>
+                    <textFill>
+                        <Color red="0.625" green="0.625" blue="0.625" fx:id="x4"/>
+                    </textFill>
+                </Label>
+                <Pane prefHeight="-1.0" prefWidth="-1.0" HBox.hgrow="ALWAYS"/>
+                <Label fx:id="rightStatus" font="$x3" maxWidth="-1.0" text="Load/Create a battle to continue"
+                       textFill="$x4" HBox.hgrow="NEVER"/>
+            </children>
+            <padding>
+                <Insets bottom="3.0" left="3.0" right="3.0" top="3.0"/>
+            </padding>
+        </HBox>
+    </children>
+</VBox>

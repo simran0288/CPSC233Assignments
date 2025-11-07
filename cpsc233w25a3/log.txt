@@ -1,0 +1,2 @@
+Arguments: [battle.txt, log.txt, 12345]
+
